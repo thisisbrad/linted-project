@@ -8,10 +8,6 @@ import "./App.css";
 function App() {
   const [count, setCount] = useState(0);
 
-  // TODO: this is a task
-  // this is the new comment
-  // this is new
-
   return (
     <>
       <div>

@@ -36,7 +36,7 @@ export default [
         {
           groups: [
             // React, Next.js and external packages (npm/node_modules)
-            ["^react", "^next", "^(?!@|\\.)\\w+"],
+            ["^react", "^(?!@|\\.)\\w+"],
             // Internal imports
             ["^@"],
             // Relative imports

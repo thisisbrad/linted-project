@@ -1,20 +1,15 @@
 import js from "@eslint/js";
-import globals from "globals";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
-import noRelativeImportPaths from "eslint-plugin-simple-import-sort";
-import { defineConfig, globalIgnores } from "eslint/config";
-
-export default defineConfig([
-  globalIgnores(["dist"]),
+import simpleImportSort from "eslint-plugin-simple-import-sort";
+import globals from "globals";
+export default [
+  {
+    ignores: ["dist"],
+  },
   {
     files: ["**/*.{js,jsx}"],
-    plugins: { "simple-import-sort/imports": noRelativeImportPaths },
-    extends: [
-      js.configs.recommended,
-      reactHooks.configs["recommended-latest"],
-      reactRefresh.configs.vite,
-    ],
+    ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: 2020,
       globals: globals.browser,
@@ -24,13 +19,23 @@ export default defineConfig([
         sourceType: "module",
       },
     },
+    plugins: {
+      "react-hooks": reactHooks,
+      "react-refresh": reactRefresh,
+      "simple-import-sort": simpleImportSort,
+    },
     rules: {
-      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
+      ...reactHooks.configs.recommended.rules,
+      "react-refresh/only-export-components": [
+        "warn",
+        { allowConstantExport: true },
+      ],
       "simple-import-sort/imports": [
         "error",
         {
           groups: [
-            ["^react", "^(?!@|\\.)\\w+"],
+            // React, Next.js and external packages (npm/node_modules)
+            ["^react", "^next", "^(?!@|\\.)\\w+"],
             // Internal imports
             ["^@"],
             // Relative imports
@@ -46,6 +51,7 @@ export default defineConfig([
         },
       ],
       "simple-import-sort/exports": "error",
+      "no-unused-vars": ["error", { varsIgnorePattern: "^[A-Z_]" }],
     },
   },
-]);
+];

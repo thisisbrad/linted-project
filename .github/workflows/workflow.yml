@@ -17,6 +17,7 @@ jobs:
           REPO: ${{ github.repository }}
           CLOSE_ISSUES: "true"
           AUTO_P: "false"
+          ISSUE_TEMPLATE: "{{ body }}\n\n---\n**File:** [{{ url }}]({{ url }})\n\n{{ snippet }}\n"
       - name: Set Git user
         run: |
           git config --global user.name "github-actions[bot]"

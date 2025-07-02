@@ -1,8 +1,9 @@
-import js from "@eslint/js";
 import reactHooks from "eslint-plugin-react-hooks";
 import reactRefresh from "eslint-plugin-react-refresh";
 import simpleImportSort from "eslint-plugin-simple-import-sort";
 import globals from "globals";
+
+import js from "@eslint/js";
 export default [
   {
     ignores: ["dist"],
@@ -43,10 +44,8 @@ export default [
             // Side effect imports and type imports
             ["^\\u0000", "^.+\\u0000$"],
             // Style and asset imports
-            [
-              "\\.(css|scss|sass|less|styl|module.css|module.scss)$",
-              "\\.(svg|png|jpg|jpeg|gif|webp|ico|mp4|webm|mp3|wav)$",
-            ],
+            ["\\.(svg|png|jpg|jpeg|gif|webp|ico|mp4|webm|mp3|wav)$"],
+            ["\\.(css|scss|sass|less|styl|module.css|module.scss)$"],
           ],
         },
       ],
